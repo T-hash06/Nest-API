@@ -18,7 +18,7 @@
 		"strictBindCallApply": false,
 		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"strictPropertyInitialization": true
+		"noUnusedLocals": true
+		// "strictPropertyInitialization": true
 	}
 }
