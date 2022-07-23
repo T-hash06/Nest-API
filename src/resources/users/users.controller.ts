@@ -39,8 +39,6 @@ export class UserController {
 		if (result.statusCode !== HttpStatus.CREATED)
 			throw new HttpException(result, result.statusCode);
 
-		console.log("Hola");
-
 		return;
 	}
 

@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database.service";
 import { UserModel } from "./users.model";
+import { hash } from "bcrypt";
 
 @Injectable()
 export class UserService {
@@ -18,7 +19,11 @@ export class UserService {
 
 	async create(user: UserModel): Promise<ServiceResponse> {
 		try {
-			await this.prisma.user.create({ data: user });
+			const hashedPassword = await hash(user.password, 4);
+			await this.prisma.user.create({
+				data: { ...user, password: hashedPassword },
+			});
+
 			return { statusCode: HttpStatus.CREATED, message: "ok" };
 		} catch (error: any) {
 			const prismaError = error as PrismaConflictError;
@@ -42,7 +47,7 @@ export class UserService {
 		} catch (error) {
 			return {
 				statusCode: HttpStatus.NOT_FOUND,
-				message: "user not found",
+				message: `user with id ${id} not found`,
 				error: "not found",
 			};
 		}
