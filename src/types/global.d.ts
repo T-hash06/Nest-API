@@ -12,6 +12,11 @@ declare global {
 		password: string;
 	}
 
+	interface Auth {
+		username: string;
+		password: string;
+	}
+
 	interface ServiceResponse {
 		statusCode: HttpStatus;
 		message: string | Record<string, any>;
@@ -20,5 +25,9 @@ declare global {
 
 	interface PrismaConflictError extends Prisma.PrismaClientKnownRequestError {
 		meta: Record<string, any>;
+	}
+
+	interface SessionPayload {
+		username: string;
 	}
 }
