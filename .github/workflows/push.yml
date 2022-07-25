@@ -8,5 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: "Echo the message"
-        run: echo "Hola T-Hash :D"
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Node Dependencies
+        run: npm install
+      - name: Build Nest JS
+        run: npm run build
+      - name: Run nest App
+        run: npm run start:prod
